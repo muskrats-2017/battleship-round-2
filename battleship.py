@@ -1,25 +1,16 @@
 class Player:
 	
-	def __init__ (self, board):
-		self.player = None
-		self.board = None
+	def __init__ (self, name, board):
+		self.name = name
+		self.board = board
 
 	def get_name(self):
-		'''
-		help set up the game
-		'''
-
-		name = input('Hello player, welcome to Battleship! What is your name:').strip()
-			print("Let's begin!")
 		
-		self.player = Player(name)
-		
-		self.board = Board(self.player)	
+		return self.name	
 
 	def get_board(self):
-		'''
-		get player's board from the board class
-		'''
+		
+		return self.board
 
 	def is_loser(self):
 		'''
@@ -28,6 +19,7 @@ class Player:
 		by checking if all ships have been sunk?
 		confused since this is kind of a one player game currently
 		'''
+		return self.board.
 
 
 class Turn:	
@@ -40,8 +32,8 @@ class Turn:
 		player inputs coordinates
 		then runs parse_coordinates?
 		'''
-		input('What tile would you like to attack:')
-		self.board.parse_coordinates()
+		target = input('What tile would you like to attack:')
+		return self.board.shot_fired(target)
 
 
 	def run (self):
@@ -49,5 +41,6 @@ class Turn:
 		uses the board class to run?
 		sets up the turn by asking for the target
 		'''
-		while self.player.is_loser() is False:
-			self.get_target()
+		result = None
+		while result is None:
+			result = self.get_target()
