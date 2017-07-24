@@ -47,9 +47,28 @@ class Turn:
 
 
 class Shot:
-	def __init__(self, board)
+	def __init__(self, target):
 		self.target = target
 		self.valid = False
+		self.is_hit = False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 
 
