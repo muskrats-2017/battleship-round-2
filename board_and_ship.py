@@ -11,21 +11,35 @@ class Board():
 			matrix.append([])
 			for value in range(10):
 				matrix[item].append(None)
-		print(matrix)
+		return matrix
 
 	def position_ship(self, ship):
+		'''
+		Given coords, will the ship even fit there
+
+		'''
+		
 		start = input("Where would you like the start point of the ship?").strip()
 		end = input("Where would you like the end of the ship?").strip()
 		start_coord = self.parse_coordinates(start)
 		end_coord = self.parse_coordinates(end)
 		
+		if start_coord[0] == end_coord[0]:
+			if ship.get_size() == (abs(start_coord[1] - end_coord[1]) +1):
+				return True
+		elif start_coord[1] == end_coord[1]:
+			if ship.get_size() == (abs(start_coord[0] - end_coord[0]) +1):
+				return True
+
 		print(start_coord)
 		print(end_coord)
+		return False
 
 		
 	
-
-
+	def	ship_position_check(self, ship, board):
+	#takes ship, start, and end and returns true or false
+		pass
 
 	
 	def count_active_ships(self):
@@ -53,7 +67,7 @@ class Board():
 
 	
 	def parse_coordinates(self, coordinates):
-		alphabetdict = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "H": 8, "I": 9, "J": 10}
+		alphabetdict = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7, "I": 8, "J": 9}
 		letter_of_coord = coordinates[0]
 		number_of_coord = coordinates[1:] 
 		number_of_coord = int(number_of_coord) if number_of_coord.isdigit() else 0
@@ -63,7 +77,7 @@ class Board():
 			print("false coordinates mate, you got your numbers wrong")
 
 		letter_to_number_coord = alphabetdict[letter_of_coord]
-		return letter_to_number_coord, number_of_coord
+		return letter_to_number_coord, number_of_coord - 1
 
 class Ship:
 	
@@ -89,11 +103,6 @@ class Ship:
 
 
 	def get_size(self):
-		 # ships = [(5, "Aircraft carrier"),
-   #                (4, "Battleship"),
-   #                (3, "Submarine"),
-   #                (3, "Cruiser"),
-   #                (2, "Patrol boat")]
 		return self.size
 
 	def hit_taken(self):

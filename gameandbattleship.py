@@ -8,7 +8,7 @@ class BattleshipGame:
                   (4, "Battleship"),
                   (3, "Submarine"),
                   (3, "Cruiser"),
-                  (2, "Patrol boat")]
+                  (2, "Destroyer")]
 
 	def __init__(self):
 		self.players = []
@@ -36,8 +36,10 @@ class BattleshipGame:
 		for configuration in self.ship_configuration:
 			ship = Ship(configuration[0], configuration[1])
 			print(ship)
-			board.position_ship(ship)
-
+			is_positioned = board.position_ship(ship) 
+			while not is_positioned:
+				print('You fucked up, do it over')
+				is_positioned = board.position_ship(ship)
 
 	def setup(self):
 		pass
