@@ -1,29 +1,29 @@
 class Board():
-	dict_of_ships = {}
-	
 		
 	def __init__(self):
-		self.matrix = []
+		self.matrix = self.generate_board()
 		self.ships = []
 		self.previous_shots = set()
-		self.size = size
 		
 	def generate_board(self):
+		matrix = []
 		for item in range(10):
-			item = []
-			self.matrix.append(item)
-			for value in range(self.matrix):
-				self.matrix[item][value] = None
-		print(self.matrix)
+			matrix.append([])
+			for value in range(10):
+				matrix[item].append(None)
+		print(matrix)
 
-	def position_ship(self, ship, start, end):
-		start = input("Where would you like the start point of the ship?")
-		end = input("Where would you like the end of the ship")
+	def position_ship(self, ship):
+		start = input("Where would you like the start point of the ship?").strip()
+		end = input("Where would you like the end of the ship?").strip()
 		start_coord = self.parse_coordinates(start)
 		end_coord = self.parse_coordinates(end)
 		
+		print(start_coord)
+		print(end_coord)
+
 		
-		dict_of_ships[ships] = self.size, start, end
+	
 
 
 

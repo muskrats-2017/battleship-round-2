@@ -1,5 +1,7 @@
 from player_and_turn import Player
-from board_and_ship import Ship
+from board_and_ship import Ship, Board
+
+
 class BattleshipGame:
 	
 	ship_configuration = [(5, "Aircraft carrier"),
@@ -26,13 +28,15 @@ class BattleshipGame:
       
 	def player_setup(self):
 		name = input('What is your name?')
-		board = None
+		board = Board()
 		self.players.append(Player(name, board))
 
 	def ship_setup(self, player):
-	
-		for ship in self.ship_configuration:
+		board = player.get_board()	
+		for configuration in self.ship_configuration:
+			ship = Ship(configuration[0], configuration[1])
 			print(ship)
+			board.position_ship(ship)
 
 
 	def setup(self):
@@ -59,6 +63,7 @@ def main():
 	game_start.player_setup()
 	print(game_start.players)
 	game_start.ship_setup(game_start.players[0])
+
 
 if __name__ == '__main__':
 	main()		
