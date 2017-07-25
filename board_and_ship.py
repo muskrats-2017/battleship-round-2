@@ -25,11 +25,22 @@ class Board():
 		end_coord = self.parse_coordinates(end)
 		
 		if start_coord[0] == end_coord[0]:
+			if start_coord[1] > end_coord[1]:
+				start_coord, end_coord = end_coord, start_coord
 			if ship.get_size() == (abs(start_coord[1] - end_coord[1]) +1):
-				return True
+				
+				sequence = ( (start_coord[0], row) for row in range(start_coord[1], end_coord[1]+1) )
+				if self.ship_position_check(ship, sequence):
+					return True
 		elif start_coord[1] == end_coord[1]:
+			if start_coord[0] > end_coord[0]:
+				start_coord, end_coord = end_coord, start_coord
+
 			if ship.get_size() == (abs(start_coord[0] - end_coord[0]) +1):
-				return True
+				
+				sequence = ( (col, start_coord[1]) for col in range(start_coord[0], end_coord[0]+1) )
+				if self.ship_position_check(ship, sequence):
+					return True
 
 		print(start_coord)
 		print(end_coord)
@@ -37,9 +48,22 @@ class Board():
 
 		
 	
-	def	ship_position_check(self, ship, board):
-	#takes ship, start, and end and returns true or false
-		pass
+	def	ship_position_check(self, ship, sequence):
+		#takes ship, start, and end and returns true or false
+		#position_ship(ship)
+		valid_coordinates = []
+		for col, row in sequence:
+			if self.matrix[row][col] is not None:
+				return False
+			else:
+				valid_coordinates.append((col, row))
+
+		for col, row in valid_coordinates:
+			self.matrix[row][col] = ship
+
+		self.ships.append(ship)
+
+		return True
 
 	
 	def count_active_ships(self):
@@ -116,7 +140,8 @@ class Ship:
 
 
 def main():
-	Board.generate_board()
+	board = Board()
+	board.generate_board()
 
 if __name__ == '__main__':
 	main()
